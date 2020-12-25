@@ -1,4 +1,4 @@
-package com.example.xm.fragment;
+package com.example.xm.view.fragment;
 
 import android.os.Bundle;
 

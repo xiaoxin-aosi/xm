@@ -1,4 +1,4 @@
-package com.example.xm;
+package com.example.xm.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,11 +8,13 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.xm.fragment.ClassifyFragment;
-import com.example.xm.fragment.MyFragment;
-import com.example.xm.fragment.ShopFragment;
-import com.example.xm.fragment.ShowFragment;
-import com.example.xm.fragment.SubjectFragment;
+import com.example.xm.R;
+import com.example.xm.view.fragment.ClassifyFragment;
+import com.example.xm.view.fragment.MyFragment;
+import com.example.xm.view.fragment.ShopFragment;
+import com.example.xm.view.fragment.ShowFragment;
+import com.example.xm.view.fragment.SubjectFragment;
+
 
 public class MainActivity extends AppCompatActivity {
     private FrameLayout fl;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ClassifyFragment classifyFragment;
     private ShopFragment shopFragment;
     private MyFragment myFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fl, subjectFragment)
                 .add(R.id.fl, classifyFragment)
                 .add(R.id.fl, shopFragment)
-                .add(R.id.fl,myFragment)
+                .add(R.id.fl, myFragment)
                 .hide(subjectFragment)
                 .hide(classifyFragment)
                 .hide(shopFragment)

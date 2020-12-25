@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,13 +22,10 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 
 public class SingleAdapter extends DelegateAdapter.Adapter {
-    private final Context context;
     private final ArrayList<Bean.DataDTO.BannerDTO> list;
     private SingleLayoutHelper singleLayoutHelper;
 
-    public SingleAdapter(Context context, ArrayList<Bean.DataDTO.BannerDTO> list, SingleLayoutHelper singleLayoutHelper) {
-
-        this.context = context;
+    public SingleAdapter( ArrayList<Bean.DataDTO.BannerDTO> list, SingleLayoutHelper singleLayoutHelper) {
         this.list = list;
         this.singleLayoutHelper = singleLayoutHelper;
     }
@@ -40,14 +38,14 @@ public class SingleAdapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_banner, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner, parent, false);
         return new BanViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        BanViewHolder viewHolder= (BanViewHolder) holder;
-        viewHolder.banner.setImages(list)
+        BanViewHolder viewHolder = (BanViewHolder) holder;
+    viewHolder.banner.setImages(list)
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
@@ -62,13 +60,14 @@ public class SingleAdapter extends DelegateAdapter.Adapter {
     public int getItemCount() {
         return 1;
     }
+
     class BanViewHolder extends RecyclerView.ViewHolder {
 
-        private final Banner banner;
+    private final Banner banner;
 
         public BanViewHolder(@NonNull View itemView) {
             super(itemView);
-            banner = itemView.findViewById(R.id.banner);
+          banner = itemView.findViewById(R.id.banner);
         }
     }
 }
