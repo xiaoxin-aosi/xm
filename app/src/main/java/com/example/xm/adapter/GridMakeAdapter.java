@@ -49,7 +49,7 @@ public class GridMakeAdapter extends DelegateAdapter.Adapter {
         Bean.DataDTO.BrandListDTO brandListDTO = dtos.get(position);
         Glide.with(context).load(brandListDTO.getNew_pic_url()).into(viewHolder.iv_image);
         viewHolder.tv1.setText(brandListDTO.getName());
-        viewHolder.tv2.setText(brandListDTO.getFloor_price());
+        viewHolder.tv2.setText(brandListDTO.getFloor_price()+"元起");
     }
 
     @Override
