@@ -25,7 +25,7 @@ public class SingleAdapter extends DelegateAdapter.Adapter {
     private final ArrayList<Bean.DataDTO.BannerDTO> list;
     private SingleLayoutHelper singleLayoutHelper;
 
-    public SingleAdapter( ArrayList<Bean.DataDTO.BannerDTO> list, SingleLayoutHelper singleLayoutHelper) {
+    public SingleAdapter(ArrayList<Bean.DataDTO.BannerDTO> list, SingleLayoutHelper singleLayoutHelper) {
         this.list = list;
         this.singleLayoutHelper = singleLayoutHelper;
     }
@@ -39,13 +39,13 @@ public class SingleAdapter extends DelegateAdapter.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner, parent, false);
-        return new BanViewHolder(view);
+        return new SingleAdapter.BanViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        BanViewHolder viewHolder = (BanViewHolder) holder;
-    viewHolder.banner.setImages(list)
+        SingleAdapter.BanViewHolder viewHolder = (SingleAdapter.BanViewHolder) holder;
+        viewHolder.banner.setImages(list)
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
@@ -63,11 +63,11 @@ public class SingleAdapter extends DelegateAdapter.Adapter {
 
     class BanViewHolder extends RecyclerView.ViewHolder {
 
-    private final Banner banner;
+        private final Banner banner;
 
         public BanViewHolder(@NonNull View itemView) {
             super(itemView);
-          banner = itemView.findViewById(R.id.banner);
+            banner = itemView.findViewById(R.id.banner);
         }
     }
 }
