@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -16,10 +15,12 @@ import com.example.xm.R;
 import com.example.xm.adapter.GridAdapter;
 import com.example.xm.adapter.GridGoodAdapter;
 import com.example.xm.adapter.GridMakeAdapter;
+import com.example.xm.adapter.LinTopAdapter;
 import com.example.xm.adapter.HotGoodsAdapter;
 import com.example.xm.adapter.SingleAdapter;
 import com.example.xm.adapter.SingleText2Adapter;
 import com.example.xm.adapter.SingleText3Adapter;
+import com.example.xm.adapter.SingleText4Adapter;
 import com.example.xm.adapter.SingleTextAdapter;
 import com.example.xm.base.BaseFragment;
 import com.example.xm.contract.MainContract;
@@ -52,6 +53,9 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
     private ArrayList<Bean.DataDTO.HotGoodsListDTO> hots;
     private HotGoodsAdapter hotGoodsAdapter;
     private SingleText3Adapter singleText3Adapter;
+    private SingleText4Adapter singleText4Adapter;
+    private ArrayList<Bean.DataDTO.TopicListDTO> tops;
+    private SinToplistAdapter sinToplistAdapter;
 
 
     @Override
@@ -82,7 +86,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         singleLayoutHelper.setItemCount(1);// 设置布局里Item个数
 //        singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
 //        singleLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        singleLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
+//        singleLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
 //        singleLayoutHelper.setAspectRatio(5);// 设置设置布局内每行布局的宽与高的比
         rcy.setLayoutManager(virtualLayoutManager);
         getBanner();
@@ -93,6 +97,8 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         getFrist();
         getText3();
         gethotGoods();
+        getText4();
+        getSinToplist();
         adapter = new DelegateAdapter(virtualLayoutManager, false);
         adapter.addAdapter(singleAdapter);
         adapter.addAdapter(mainGridAdapter);
@@ -102,7 +108,27 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         adapter.addAdapter(gridGoodAdapter);
         adapter.addAdapter(singleText3Adapter);
         adapter.addAdapter(hotGoodsAdapter);
+        adapter.addAdapter(singleText4Adapter);
+        adapter.addAdapter(sinToplistAdapter);
+
         rcy.setAdapter(adapter);
+
+    }
+
+    private void getSinToplist() {
+
+        tops = new ArrayList<>();
+        sinToplistAdapter = new SinToplistAdapter(tops,singleLayoutHelper,activity);
+    }
+
+
+    private void getSingleTopAdapter() {
+//        new SingleTopAdapter(singleLayoutHelper);
+
+    }
+
+    private void getText4() {
+        singleText4Adapter = new SingleText4Adapter(singleLayoutHelper);
     }
 
     private void getText3() {
@@ -114,6 +140,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
         // linearLayoutHelper特有属性
         linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
+
         hots = new ArrayList<>();
         hotGoodsAdapter = new HotGoodsAdapter(linearLayoutHelper, activity, hots);
 
@@ -122,7 +149,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
     private void getFrist() {
         gridLayoutHelper = new GridLayoutHelper(2);
         // gridLayoutHelper特有属性（下面会详细说明）
-        gridLayoutHelper.setWeights(new float[]{50,50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
+        gridLayoutHelper.setWeights(new float[]{50, 50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
         gridLayoutHelper.setVGap(20);// 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(25);// 控制子元素之间的水平间距
         gridLayoutHelper.setAutoExpand(false);//是否自动填充空白区域
@@ -138,7 +165,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
     private void getGridMake() {
         gridLayoutHelper = new GridLayoutHelper(2);
         // gridLayoutHelper特有属性（下面会详细说明）
-        gridLayoutHelper.setWeights(new float[]{50,50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
+        gridLayoutHelper.setWeights(new float[]{50, 50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
         gridLayoutHelper.setVGap(20);// 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(25);// 控制子元素之间的水平间距
         gridLayoutHelper.setAutoExpand(false);//是否自动填充空白区域
@@ -200,6 +227,9 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         List<Bean.DataDTO.HotGoodsListDTO> hotGoodsList = bean.getData().getHotGoodsList();
         hots.addAll(hotGoodsList);
         hotGoodsAdapter.notifyDataSetChanged();
+        List<Bean.DataDTO.TopicListDTO> topicList = bean.getData().getTopicList();
+        tops.addAll(topicList);
+        sinToplistAdapter.notifyDataSetChanged();
     }
 }
 
