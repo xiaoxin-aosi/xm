@@ -38,7 +38,7 @@ public class ChildSinToplistAdapter extends RecyclerView.Adapter {
         Bean.DataDTO.TopicListDTO topicListDTO = tops.get(position);
         Glide.with(context).load(topicListDTO.getItem_pic_url()).into(viewHolder.iv_tops);
         viewHolder.tv_tops_name.setText(topicListDTO.getTitle());
-        viewHolder.tv_tops_price.setText("￥"+topicListDTO.getPrice_info());
+        viewHolder.tv_tops_price.setText("￥"+topicListDTO.getPrice_info()+"元起");
         viewHolder.tv_tops_subtitle.setText(topicListDTO.getSubtitle());
     }
 

@@ -1,6 +1,5 @@
 package com.example.xm.view.fragment;
 
-import android.graphics.Color;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
@@ -15,8 +14,8 @@ import com.example.xm.R;
 import com.example.xm.adapter.GridAdapter;
 import com.example.xm.adapter.GridGoodAdapter;
 import com.example.xm.adapter.GridMakeAdapter;
-import com.example.xm.adapter.LinTopAdapter;
 import com.example.xm.adapter.HotGoodsAdapter;
+import com.example.xm.adapter.ChildSinCategoryAdapter;
 import com.example.xm.adapter.SingleAdapter;
 import com.example.xm.adapter.SingleText2Adapter;
 import com.example.xm.adapter.SingleText3Adapter;
@@ -56,6 +55,8 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
     private SingleText4Adapter singleText4Adapter;
     private ArrayList<Bean.DataDTO.TopicListDTO> tops;
     private SinToplistAdapter sinToplistAdapter;
+    private ArrayList<Bean.DataDTO.CategoryListDTO> cates;
+    private SinCategoryAdapter sinCategoryAdapter;
 
 
     @Override
@@ -99,6 +100,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         gethotGoods();
         getText4();
         getSinToplist();
+        getCategory();
         adapter = new DelegateAdapter(virtualLayoutManager, false);
         adapter.addAdapter(singleAdapter);
         adapter.addAdapter(mainGridAdapter);
@@ -110,7 +112,7 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         adapter.addAdapter(hotGoodsAdapter);
         adapter.addAdapter(singleText4Adapter);
         adapter.addAdapter(sinToplistAdapter);
-
+        adapter.addAdapter(sinCategoryAdapter);
         rcy.setAdapter(adapter);
 
     }
@@ -122,8 +124,9 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
     }
 
 
-    private void getSingleTopAdapter() {
-//        new SingleTopAdapter(singleLayoutHelper);
+    private void getCategory() {
+        cates = new ArrayList<>();
+        sinCategoryAdapter = new SinCategoryAdapter(cates,singleLayoutHelper,activity);
 
     }
 
@@ -230,6 +233,9 @@ public class ShowFragment extends BaseFragment<MainPresenter> implements MainCon
         List<Bean.DataDTO.TopicListDTO> topicList = bean.getData().getTopicList();
         tops.addAll(topicList);
         sinToplistAdapter.notifyDataSetChanged();
+        List<Bean.DataDTO.CategoryListDTO> categoryList = bean.getData().getCategoryList();
+        cates.addAll(categoryList);
+        sinCategoryAdapter.notifyDataSetChanged();
     }
 }
 
