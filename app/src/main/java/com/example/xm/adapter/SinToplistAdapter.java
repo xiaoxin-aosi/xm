@@ -1,4 +1,4 @@
-package com.example.xm.view.fragment;
+package com.example.xm.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

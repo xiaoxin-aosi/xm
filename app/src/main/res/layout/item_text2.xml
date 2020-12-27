@@ -12,6 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="周一周四·新品首发"

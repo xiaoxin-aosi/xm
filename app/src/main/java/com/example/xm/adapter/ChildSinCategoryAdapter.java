@@ -1,6 +1,7 @@
 package com.example.xm.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ public class ChildSinCategoryAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChildSinCategoryViewHolder viewHolder= (ChildSinCategoryViewHolder) holder;
         Bean.DataDTO.CategoryListDTO.GoodsListDTO listDTO = goodsList.get(position);
-        Glide.with(context).load(listDTO.getList_pic_url()).into(viewHolder.iv_sincategory);
+        Glide.with(context).load(listDTO.getList_pic_url())
+                .into(viewHolder.iv_sincategory);
         viewHolder.tv_sincategory_name.setText(listDTO.getName());
         viewHolder.tv_sincategory_price.setText("￥"+listDTO.getRetail_price());
     }

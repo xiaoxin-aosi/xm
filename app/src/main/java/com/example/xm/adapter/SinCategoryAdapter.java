@@ -1,4 +1,4 @@
-package com.example.xm.view.fragment;
+package com.example.xm.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -48,6 +48,7 @@ public class SinCategoryAdapter extends DelegateAdapter.Adapter {
         SinCategoryViewHolder viewHolder= (SinCategoryViewHolder) holder;
         Bean.DataDTO.CategoryListDTO categoryListDTO = cates.get(position);
         viewHolder.tv_name.setText(categoryListDTO.getName());
+
         viewHolder.rcy.setLayoutManager(new GridLayoutManager(context,2));
         List<Bean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = categoryListDTO.getGoodsList();
         ChildSinCategoryAdapter childSinCategory = new ChildSinCategoryAdapter(context, goodsList);

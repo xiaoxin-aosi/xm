@@ -17,52 +17,70 @@
         android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
+            android:gravity="center"
             android:id="@+id/bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableTop="@drawable/show_sel"
+            android:drawablePadding="3dip"
             android:checked="true"
+            android:textSize="17sp"
+            android:layout_weight="1"
             android:text="首页" />
 
         <RadioButton
+            android:gravity="center"
             android:id="@+id/bt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableTop="@drawable/subject_sel"
             android:layout_marginLeft="20dp"
+            android:drawablePadding="3dip"
+            android:layout_weight="1"
+            android:textSize="17sp"
             android:text="专题" />
 
         <RadioButton
+            android:gravity="center"
             android:id="@+id/bt3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableTop="@drawable/class_sel"
             android:layout_marginLeft="20dp"
+            android:drawablePadding="3dip"
+            android:layout_weight="1"
+            android:textSize="17sp"
             android:text="分类" />
 
         <RadioButton
+            android:gravity="center"
             android:id="@+id/bt4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableTop="@drawable/shop_sel"
             android:layout_marginLeft="20dp"
+            android:drawablePadding="3dip"
+            android:layout_weight="1"
+            android:textSize="17sp"
             android:text="购物车" />
         <RadioButton
+            android:gravity="center"
             android:id="@+id/bt5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableTop="@drawable/my_sel"
-
+            android:drawablePadding="3dip"
             android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:textSize="17sp"
             android:text="我的" />
     </RadioGroup>
 
