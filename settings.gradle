@@ -1,2 +1,4 @@
+include ':mylibrary'
+include ':myvp'
 include ':app'
 rootProject.name = "xm"

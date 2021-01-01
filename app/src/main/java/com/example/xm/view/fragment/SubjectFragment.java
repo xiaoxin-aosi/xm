@@ -2,65 +2,108 @@ package com.example.xm.view.fragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.example.mylibrary.base.BaseFragment;
 import com.example.xm.R;
+import com.example.xm.adapter.show.HotGoodsAdapter;
+import com.example.xm.adapter.show.SingleTextAdapter;
+import com.example.xm.adapter.sub.DataLinAdapter;
+import com.example.xm.adapter.sub.SubTextAdapter;
+import com.example.xm.bean.Bean;
+import com.example.xm.bean.SubBean;
+import com.example.xm.contract.MainContract;
+import com.example.xm.presenter.MainPresenter;
+import com.example.xm.presenter.SubPresenter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SubjectFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SubjectFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SubjectFragment extends BaseFragment<SubPresenter> implements MainContract.SubView {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public SubjectFragment() {
-        // Required empty public constructor
+    private FragmentActivity activity;
+    private RecyclerView rcy;
+    private VirtualLayoutManager virtualLayoutManager;
+    private LinearLayoutHelper linearLayoutHelper;
+    private ArrayList<SubBean.DataDTO.DataDTOS> list;
+    private DataLinAdapter dataLinAdapter;
+    private DelegateAdapter adapter;
+    private SingleLayoutHelper singleLayoutHelper;
+    private SubTextAdapter subTextAdapter;
+
+    @Override
+    protected void initView(View view) {
+        rcy = view.findViewById(R.id.rcy);
+        activity = getActivity();
+        virtualLayoutManager = new VirtualLayoutManager(activity);
+        // 创建VirtualLayoutManager对象
+        // 同时内部会创建一个LayoutHelperFinder对象，用来后续的LayoutHelper查找
+
+        // 将VirtualLayoutManager绑定到recyclerView
+        //设置回收复用池大小
+        // 设置组件复用回收池
+        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+        rcy.setRecycledViewPool(viewPool);
+        viewPool.setMaxRecycledViews(0, 10);
+        rcy.setLayoutManager(virtualLayoutManager);
+
+        rcy.setLayoutManager(virtualLayoutManager);
+        getDataLin();
+        getText1();
+        adapter = new DelegateAdapter(virtualLayoutManager);
+        adapter.addAdapter(dataLinAdapter);
+        adapter.addAdapter(subTextAdapter);
+        rcy.setAdapter(adapter);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SubjectFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SubjectFragment newInstance(String param1, String param2) {
-        SubjectFragment fragment = new SubjectFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void getText1() {
+        singleLayoutHelper = new SingleLayoutHelper();
+        subTextAdapter = new SubTextAdapter(singleLayoutHelper);
+    }
+
+    private void getDataLin() {
+        linearLayoutHelper = new LinearLayoutHelper();
+        linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
+        // linearLayoutHelper特有属性
+        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
+        list=new ArrayList<>();
+        dataLinAdapter = new DataLinAdapter(linearLayoutHelper, activity, list);
+    }
+
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_subject;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    protected void initData() {
+        presenter.getData();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subject, container, false);
+    protected SubPresenter getPresenter() {
+        return new SubPresenter();
+    }
+
+
+    @Override
+    public void getData(SubBean subBean) {
+        Log.d("安", "getData: "+subBean.toString());
+        List<SubBean.DataDTO.DataDTOS> data = subBean.getData().getData();
+        list.addAll(data);
+        dataLinAdapter.notifyDataSetChanged();
     }
 }

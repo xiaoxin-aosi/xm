@@ -1,11 +1,12 @@
 package com.example.xm.presenter;
 
-import com.example.xm.base.BasePresenter;
+
+import com.example.mylibrary.base.BasePresenter;
+import com.example.mylibrary.net.CallBack;
+import com.example.xm.bean.Bean;
+import com.example.xm.bean.URLConstant;
 import com.example.xm.contract.MainContract;
 import com.example.xm.model.MainModel;
-import com.example.xm.net.Bean;
-import com.example.xm.net.CallBack;
-import com.example.xm.net.URLConstant;
 
 public class MainPresenter extends BasePresenter<MainContract.IMainView,MainContract.ImainModel> implements MainContract.ImainPresenter {
     @Override
@@ -23,7 +24,6 @@ public class MainPresenter extends BasePresenter<MainContract.IMainView,MainCont
 
             @Override
             public void onFail(String string) {
-//                iView.getData(string);
             }
         });
     }

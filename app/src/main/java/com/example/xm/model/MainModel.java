@@ -1,8 +1,8 @@
 package com.example.xm.model;
 
+import com.example.mylibrary.net.CallBack;
+import com.example.xm.bean.RetrofitUtils;
 import com.example.xm.contract.MainContract;
-import com.example.xm.net.CallBack;
-import com.example.xm.net.RetrofitUtils;
 
 public class MainModel implements MainContract.ImainModel {
     @Override
